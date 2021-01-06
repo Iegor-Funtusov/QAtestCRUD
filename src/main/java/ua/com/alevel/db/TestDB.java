@@ -5,6 +5,7 @@ import ua.com.alevel.data.User;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Iehor Funtusov, created 23/12/2020 - 8:19 PM
@@ -72,5 +73,10 @@ public class TestDB {
 
     public void deleteProfile(int id) {
         profiles.removeIf(profile -> profile.getId() == id);
+    }
+
+    public void removeByUserId(int userId) {
+        List<Profile> list = profiles.stream().filter(profile -> profile.getUserId() == userId).collect(Collectors.toList());
+        list.forEach(profile -> deleteProfile(profile.getId()));
     }
 }
